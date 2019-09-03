@@ -15,6 +15,7 @@ import CartContext from "./contexts//CartContext";
 function App() {
 	const [products] = useState(data);
 	const [cart, setCart] = useState([]);
+	console.log(products);
 
 	const addItem = item => {
 		setCart([...cart, item]);
@@ -27,8 +28,8 @@ function App() {
 					<Navigation cart={cart} />
 
 					{/* Routes */}
-					<Route exact path="/"/>
-					<Route path="/cart" />
+					<Route exact path="/" component={Products}/>
+					<Route path="/cart" component={ShoppingCart}/>
 				</div>
 			</CartContext.Provider>
 		</ProductContext.Provider>
