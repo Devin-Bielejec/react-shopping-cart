@@ -5,25 +5,28 @@ import CartContext from "../contexts/CartContext";
 import Item from './ShoppingCartItem';
 
 const ShoppingCart = () => {
-	const { cart } = useContext(CartContext);
-	console.log("Cart is", cart);
+	const contextValue = useContext(CartContext);
 	const getCartTotal = () => {
-		return cart.reduce((acc, value) => {
+		return contextValue.cart.reduce((acc, value) => {
 			return acc + value.price;
 		}, 0).toFixed(2);
 	};
 
 	return (
-		<div className="shopping-cart">
-			{cart.map(item => (
-				<Item key={item.id} {...item} />
-			))}
+		<CartContext.Consumer>
+			{context => (
+				<div className="shopping-cart">
+					{context.cart.map(item => (
+						<Item key={item.id} {...item} />
+					))}
 
-			<div className="shopping-cart__checkout">
-				<p>Total: ${getCartTotal()}</p>
-				<button>Checkout</button>
-			</div>
-		</div>
+					<div className="shopping-cart__checkout">
+						<p>Total: ${getCartTotal()}</p>
+						<button>Checkout</button>
+					</div>
+				</div>
+			)}
+		</CartContext.Consumer>
 	);
 };
 
