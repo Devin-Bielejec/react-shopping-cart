@@ -5,19 +5,19 @@ import ProductContext from "../contexts/ProductContext";
 import Product from './Product';
 
 const Products = () => {
-	const { products, addItem } = useContext(ProductContext);
-	console.log(products);
-	return (
-		<div className="products-container">
-			{products.map(product => (
+	return(
+	<ProductContext.Consumer>
+		{context => (<div className="products-container">
+			{context.products.map(product => (
 				<Product
 					key={product.id}
 					product={product}
-					addItem={addItem}
+					addItem={context.addItem}
 				/>
 			))}
-		</div>
-	);
+		</div>)}
+	</ProductContext.Consumer>
+	)
 };
 
 export default Products;
